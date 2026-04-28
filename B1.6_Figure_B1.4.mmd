@@ -1,0 +1,37 @@
+flowchart TB
+  subgraph Requesters["Requesters\n(Fully coherent)"]
+    direction LR
+    RNF0[RN-F0]
+    RNF1[RN-F1]
+    RNF2[RN-F2]
+  end
+
+  RNI["RN-I\nRequester\n(IO coherent)"]
+
+  subgraph ICN[ICN]
+    direction LR
+    HNI[HN-I]
+    HNF1[HN-F]
+    HNF2[HN-F]
+    MN[MN]
+  end
+
+  subgraph Subordinates[Subordinates]
+    direction LR
+    SNI[SN-I]
+    SNF[SN-F]
+  end
+
+  SUB_L["Subordinate\n(Peripheral or Normal Memory, or both)"]
+  SUB_R["Subordinate\n(Normal Memory)"]
+
+  RNF0 --> ICN
+  RNF1 --> ICN
+  RNF2 --> ICN
+  RNI --> ICN
+
+  ICN --> SNI
+  ICN --> SNF
+
+  SNI --> SUB_L
+  SNF --> SUB_R
